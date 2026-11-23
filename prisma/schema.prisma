@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Download {
+  id              String    @id @default(cuid())
+  url             String
+  title           String
+  // "direct" | "hls"
+  kind            String
+  // "queued" | "downloading" | "completed" | "failed" | "canceled"
+  status          String    @default("queued")
+  progress        Float     @default(0)
+  downloadedBytes Float     @default(0)
+  totalBytes      Float?
+  speedBps        Float     @default(0)
+  etaSeconds      Int?
+  segmentsDone    Int       @default(0)
+  segmentsTotal   Int       @default(0)
+  // Final absolute file path on disk (null until it exists)
+  filePath        String?
+  // mp4 | webm | ts | mkv ...
+  container       String?
+  qualityLabel    String?
+  error           String?
+  // JSON encoded custom request headers
+  headers         String    @default("{}")
+  // Selected HLS variant URL (for master playlists)
+  variantUrl      String?
+  hasThumbnail    Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  completedAt     DateTime?
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+/// One row per page view (no IP addresses or names are stored).
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  lang      String   @default("en")
+  /// Calendar day (YYYY-MM-DD, UTC) for fast daily totals
+  day       String
+  /// Salted daily hash of IP + browser, only to count unique visitors per day
+  visitor   String
+  referrer  String?
+  device    String   @default("desktop")
+  createdAt DateTime @default(now())
+
+  @@index([day])
+  @@index([createdAt])
+  @@index([path])
+}
+
+/// Blog articles written in the admin panel (built-in articles live in src/lib/blog.ts).
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String
+  lang        String   @default("en")
+  title       String
+  metaTitle   String
+  description String
+  excerpt     String
+  keywords    String   @default("")
+  category    String   @default("Drama guides")
+  coverKicker String   @default("NEW")
+  /// Article body in Markdown-lite: "## heading", "- list item", blank line between paragraphs
+  content     String
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([slug, lang])
+  @@index([lang, published])
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-labelledby="t4">
+  <title id="t4">ARYPlusD works on Android, iPhone, tablets and Windows, Mac or Linux computers</title>
+  <defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#064e3b"/><stop offset="1" stop-color="#0f172a"/></linearGradient></defs>
+  <rect width="640" height="320" rx="24" fill="url(#g4)"/>
+  <rect x="150" y="60" width="300" height="180" rx="12" fill="#111827" stroke="#374151" stroke-width="4"/>
+  <rect x="164" y="74" width="272" height="152" rx="4" fill="#064e3b"/>
+  <path d="M285 125v50l42-25z" fill="#fff"/>
+  <path d="M120 250h360l-20 18H140z" fill="#374151"/>
+  <rect x="470" y="110" width="84" height="150" rx="14" fill="#111827" stroke="#374151" stroke-width="3"/>
+  <rect x="478" y="126" width="68" height="116" rx="4" fill="#065f46"/>
+  <path d="M502 170v28l22-14z" fill="#fff"/>
+  <rect x="70" y="140" width="64" height="118" rx="12" fill="#111827" stroke="#374151" stroke-width="3"/>
+  <rect x="77" y="154" width="50" height="90" rx="3" fill="#065f46"/>
+  <path d="M95 186v24l18-12z" fill="#fff"/>
+  <text x="320" y="300" fill="#a7f3d0" font-family="Arial, sans-serif" font-size="15" text-anchor="middle">Android · iPhone · Windows · Mac · Linux</text>
+</svg>
